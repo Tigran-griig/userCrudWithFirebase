@@ -7,17 +7,6 @@ import UserActions from "../../src/redux/actions/user";
 import AdminLayout from "@/components/AdminLayout/Admin.Layout";
 
 const DashboardPage = () => {
-  const router = useRouter();
-  const paths = usePaths();
-  const { user } = useSelector((state: { user: UserType }) => state)
-  const redirectURL = router.query.next?.toString() || paths.account.login.$url();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!user?.isAuth) {
-      dispatch(UserActions.getUserData(redirectURL, router))
-    }
-  }, [])
 
   return (
     <>

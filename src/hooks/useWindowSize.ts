@@ -1,7 +1,6 @@
-import { useLayoutEffect, useState } from 'react'
-
-// See: https://usehooks-ts.com/react-hook/use-event-listener
+import { useState } from 'react'
 import { useEventListener } from './useEventListener'
+import useIsomorphicLayoutEffect from "./useIsomorphicLayoutEffect";
 
 interface WindowSize {
   width: number
@@ -24,9 +23,8 @@ function useWindowSize(): WindowSize {
   useEventListener('resize', handleSize)
 
   // Set size at the first client-side load
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     handleSize()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return windowSize

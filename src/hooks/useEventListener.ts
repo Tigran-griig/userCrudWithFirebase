@@ -39,7 +39,6 @@ function useEventListener<KW extends keyof WindowEventMap,
 
     // Create event listener that calls handler function stored in ref
     const eventListener: typeof handler = event => {
-      // eslint-disable-next-line no-extra-boolean-cast
       if (!!savedHandler?.current) {
         savedHandler.current(event)
       }

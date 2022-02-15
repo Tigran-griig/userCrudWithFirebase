@@ -14,7 +14,8 @@ const UserActions = {
   }),
 
   getUserData: (redirectUrl: string | { query: OptionalQuery | undefined; hash: string | undefined; pathname: string }, router: NextRouter) => async (dispatch: Dispatch) => {
-    const { id_token } = getStorageItem("user");
+    const  id_token  = getStorageItem("id_token");
+    debugger
     if (id_token) {
       try {
         const response = await new MakeRequest().postJson(ENDPOINT_URLS[SIGN_IN_WITH_TOKEN](firebaseAuth?.config?.apiKey), {
@@ -23,7 +24,7 @@ const UserActions = {
           headers: {
             "Content-Type": "application/json",
           }
-        })
+        });
         const { users } = response;
         dispatch(UserActions.setUserData(users[0]))
         return users;

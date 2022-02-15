@@ -14,7 +14,7 @@ const CustomerActions = {
   }),
 
   getCustomerData: () => async (dispatch: Dispatch) => {
-    const { refresh_token, id_token } = getStorageItem("user");
+    const id_token  = getStorageItem("id_token");
     if (id_token) {
       try {
         const response = await new MakeRequest().postJson(ENDPOINT_URLS[SIGN_IN_WITH_TOKEN](firebaseAuth?.config?.apiKey), {

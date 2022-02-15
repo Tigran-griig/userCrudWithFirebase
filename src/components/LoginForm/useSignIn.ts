@@ -43,10 +43,7 @@ export const useSignIn = () => {
         }
       })
         .then((res) => {
-          setStorageItem("user", {
-            "refresh_token": res.refreshToken,
-            "id_token": res.idToken,
-          })
+          setStorageItem("id_token", res.idToken)
           setIsSubmitting(false);
           return dispatch(UserActions.setUserData(res));
         })

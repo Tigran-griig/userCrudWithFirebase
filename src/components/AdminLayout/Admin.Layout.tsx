@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./AdminLayout.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UserType } from "../../redux/reducers/user";
 import Navbar from "./Navbar";
 import Tabs from '@mui/material/Tabs';
@@ -11,6 +11,7 @@ import Link from "next/link";
 import { usePaths } from "@/lib/paths";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useRouter } from "next/router";
+import UserActions from "../../redux/actions/user";
 
 export interface AdminLayoutProps {
   children?: React.ReactNode;
@@ -28,7 +29,15 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
   const paths = usePaths();
   const [value, setValue] = React.useState(0);
   const { width } = useWindowSize();
+  const router = useRouter();
+  const redirectURL = paths.account.login.$url();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!user?.isAuth) {
+      dispatch(UserActions.getUserData(redirectURL, router))
+    }
+  }, [user])
 
   return (
     <>
